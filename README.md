@@ -1,2 +1,1 @@
-# comicscomealive.com
-comicscomealive.com
+Static site.
