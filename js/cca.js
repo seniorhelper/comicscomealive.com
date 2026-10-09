@@ -83,7 +83,8 @@ CCA.esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"
 CCA.form=(form)=>{const t0=Date.now();let human=false;const mark=()=>{human=true};form.addEventListener('keydown',mark);form.addEventListener('pointerdown',mark);
  const out=form.querySelector('[data-status]');const say=(m,cls)=>{if(out){out.textContent=m;out.className='fstatus '+(cls||'')}};
  form.addEventListener('submit',async e=>{e.preventDefault();const fd=new FormData(form);
-  if(fd.get('_honey')||Date.now()-t0<4000||!human){say('Thanks! We got it.','ok');form.reset();return}
+  if(fd.get('_honey'))return;
+  if(Date.now()-t0<3500||!human){say('Give the form a moment, then send again.','warn');return}
   if(!form.checkValidity()){form.reportValidity();return}
   const d=form.dataset;const who=atob(d.a)+String.fromCharCode(64)+d.b.split('|').map(x=>atob(x)).join('');
   fd.delete('_honey');fd.append('_captcha','false');fd.append('_template','table');
